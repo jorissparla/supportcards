@@ -10,6 +10,7 @@
     "react-apollo": "^1.1.2",
     "react-dom": "^15.5.4",
     "react-tap-event-plugin": "^2.0.1",
+    "styled-components": "^1.4.5",
     "styled-jsx": "^0.5.7"
   },
   "devDependencies": {
