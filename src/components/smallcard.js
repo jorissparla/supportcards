@@ -5,6 +5,7 @@ import FlatButton from 'material-ui/FlatButton';
 import FontIcon from 'material-ui/FontIcon';
 import IconButton from 'material-ui/IconButton';
 import ThumbsUp from 'material-ui/svg-icons/action/thumb-up';
+import ModeEdit from 'material-ui/svg-icons/editor/mode-edit';
 import { blue500 } from 'material-ui/styles/colors';
 
 import Divider from 'material-ui/Divider';
@@ -17,13 +18,13 @@ const Container = styled.div`
   margin: 5px;
   
 `;
-const TeamSpan = styled.div`
+const Cat = styled.div`
   width: 20%;
-  color: orange;
   margin-right: 5px;
   margin-left: 10px;
   margin-top: 10px;
   flex-grow: 1;
+   font-weight: 800;
 `;
 
 const Title = styled.div`
@@ -32,6 +33,7 @@ const Title = styled.div`
   font-weight: 800;
   padding: 2px;
   flex-grow:0;
+  margin: 5px;
 `;
 const Inner = styled.div`
   display: flex;
@@ -62,13 +64,16 @@ const Outer = styled.div`
   display: flex;
   flex-wrap:wrap;
 `;
-const paperStyle = {
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'space-between',
-  width: '22%',
-  margin: '5px',
-  minWidth: '200px'
+const paperStyle = color => {
+  return {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    width: '22%',
+    margin: '5px',
+    minWidth: '200px',
+    backgroundColor: color
+  };
 };
 
 const SmallCard = ({
@@ -78,21 +83,38 @@ const SmallCard = ({
   category = 'Cloud',
   link = 'http://www.google.com',
   likes = 1,
-  action = null
+  action = null,
+  color = '#FFFFF',
+  canEdit = false
 }) => {
   return (
-    <Paper style={paperStyle} zDepth={3}>
+    <Paper style={paperStyle(color)} zDepth={3}>
       <Title>{title}</Title>
+
       <StyledBody>
         {text.slice(0, 100)}
       </StyledBody>
       <Divider />
       <BottomStyle>
-        <IconButton>
-          <ThumbsUp color={blue500} />{likes}
-        </IconButton>
-        <TeamSpan>{category}</TeamSpan>
-        <FlatButton primary={true} onClick={() => window.open(link)}>
+        {canEdit &&
+          <IconButton
+            iconStyle={{
+              height: '16px',
+              width: '16px',
+              flexGrow: 0
+            }}
+          >
+            <ModeEdit />{likes}
+          </IconButton>}
+        <Cat>{category}</Cat>
+        <FlatButton
+          style={{
+            flexGrow: 0,
+            margin: '2px'
+          }}
+          primary={true}
+          onClick={() => window.open(link)}
+        >
           {buttonText.toUpperCase()}{' '}
         </FlatButton>
       </BottomStyle>

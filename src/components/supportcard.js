@@ -3,6 +3,8 @@ import { gql, graphql } from 'react-apollo';
 import { SmallCard } from './smallcard';
 import styled from 'styled-components';
 
+const cardColors = ['#FFAB40', '#80D8FF', '#8E24AA', '#607D8B'];
+
 const Div = styled.div`
   display: flex;
     justify-content: flex-start;
@@ -34,7 +36,7 @@ const SupportCards = ({ data: { loading, error, supportcards }, filter }) => {
   );
   return (
     <Div>
-      {filteredCards.map(({ id, title, description, category, link }) => (
+      {filteredCards.map(({ id, title, description, category, link }, i) => (
         <SmallCard
           key={id}
           title={title}
@@ -42,6 +44,7 @@ const SupportCards = ({ data: { loading, error, supportcards }, filter }) => {
           category={category}
           buttonText="Open"
           link={link}
+          canEdit={true}
         />
       ))}
     </Div>
